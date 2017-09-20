@@ -64,21 +64,22 @@ VectorXf estimate(VectorXf& sbuff, VectorXf& rbuff, int estimator_length)  // 2,
 
 	// generate A
 	MatrixXf A = x2A(sbuff, k);	
-		BDCSVD<MatrixXf> svd(A, ComputeThinU|ComputeThinV);		  // use BDC SVD which is for large matrix   Guy: Compute U and V  matrices (A = U*S*V)
-	VectorXf h = svd.solve(rbuff);									//Guy: Solves A*h=rbuff  (rbuff is the RX samples)
+		BDCSVD<MatrixXf> svd(A, ComputeThinU|ComputeThinV);		// use BDC SVD which is for large matrix   Guy: Compute U and V  matrices (A = U*S*V)
+	VectorXf h = svd.solve(rbuff);								//Guy: Solves A*h=rbuff  (rbuff is the RX samples)
 	
-	/* MatrixXf A2 = A.transpose()*A;					   // this way may not work for big estimator length
+	/* MatrixXf A2 = A.transpose()*A;		// this way may not work for big estimator length
 	if(!A2.determinant())
 	{
 		cout<<"\n error: A'A is not invertible!"<<endl;
 		exit(0);
 	}
-	h = A2.inverse()*A.transpose()*rbuff;			   // since A's psuedo inverse is (A'A)^-1 * A', it's A_inv*y*/
+	h = A2.inverse()*A.transpose()*rbuff;		// since A's psuedo inverse is (A'A)^-1 * A', it's A_inv*y*/
 	
 	return h;
-
 }
 
+//Guy: Gets TX samples-> sbuff, RX samples-> rbuff, h coefficients-> h, length of 2k-> estimator_length
+//Guy: Calculats the y-Ah vector => this is the RX signal after the SIC
 VectorXf dg_cancel(VectorXf& sbuff, VectorXf& rbuff, VectorXf& h, int estimator_length)  //3, cancellation
 {
 	// definition
@@ -95,9 +96,9 @@ VectorXf dg_cancel(VectorXf& sbuff, VectorXf& rbuff, VectorXf& h, int estimator_
 	// generate A1
 	MatrixXf A1 = x2A(sbuff, k);
 	return rbuff - A1*h;
-
 }
 
+//Guy: 
 VectorXf dg_sic(
 	VectorXf &x, 
 	VectorXf &y,							       // initial signal got from UHD: here haven't defined complex number
