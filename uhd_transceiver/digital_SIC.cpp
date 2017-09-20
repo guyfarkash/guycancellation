@@ -101,12 +101,12 @@ VectorXf dg_cancel(VectorXf& sbuff, VectorXf& rbuff, VectorXf& h, int estimator_
 //Guy: 
 VectorXf dg_sic(
 	VectorXf &x, 
-	VectorXf &y,							       // initial signal got from UHD: here haven't defined complex number
-	VectorXf &preamble,					       // should have complete definition later
+	VectorXf &y,		// initial signal got from UHD: here haven't defined complex number
+	VectorXf &preamble,		// should have complete definition later
 	int estimator_length,
 	int preamble_length,
 	int pilot_length,
-	int signal_length,						   // the length of TX which made signal_length + delay <= RX's length, may be redefine
+	int signal_length,		// the length of TX which made signal_length + delay <= RX's length, may be redefine
 	int samp_rate
 	)
 {
@@ -120,11 +120,11 @@ VectorXf dg_sic(
 	
 
 	int k = estimator_length/2;
-	Index delay = dg_sync(preamble, y);				// error here: Index type? or calculate?
+	Index delay = dg_sync(preamble, y);		// error here: Index type? or calculate?    Guy: ??????
 	cout<<"-- delay = "<<delay<<endl;
 
 	// define tx&rx_pilot and estimate h
-	// error here: Segmentation fault (core dumped)
+	// error here: Segmentation fault (core dumped)  Guy: ??????
 	
 	if(preamble_length + pilot_length + k - 2 >= x.size() | delay + preamble_length + pilot_length - 1 >= y.size())
 {
