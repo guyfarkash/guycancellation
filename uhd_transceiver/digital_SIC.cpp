@@ -119,20 +119,20 @@ VectorXf dg_sic(
 	cout<<"-- pilot_length: "<<pilot_length<<endl<<endl;
 	
 
-	int k = estimator_length/2;
+	int k = estimator_length/2;				//Guy: estimator_length must be an even int, check and make adjustments !!!
 	Index delay = dg_sync(preamble, y);		// error here: Index type? or calculate?    Guy: ??????
 	cout<<"-- delay = "<<delay<<endl;
 
 	// define tx&rx_pilot and estimate h
 	// error here: Segmentation fault (core dumped)  Guy: ??????
 	
-	if(preamble_length + pilot_length + k - 2 >= x.size() | delay + preamble_length + pilot_length - 1 >= y.size())
+	if(preamble_length + pilot_length + k - 2 >= x.size() | delay + preamble_length + pilot_length - 1 >= y.size())	//Guy: ????
 {
 	cout<<"\n error: the last index of requested pilot is beyond given signal!"<<endl;
 	exit(0);
 }
-	VectorXf tx_pilot = x.segment(preamble_length - k, pilot_length + 2*k - 1);
-	VectorXf rx_pilot = y.segment(delay + preamble_length, pilot_length);
+	VectorXf tx_pilot = x.segment(preamble_length - k, pilot_length + 2*k - 1);		//Guy: x[...(pre-k)----------(pre-k+pilot+2k-1)...] ?????
+	VectorXf rx_pilot = y.segment(delay + preamble_length, pilot_length);			//Guy: y[...(delay+pre)----------(de+pre+pilot)...]  ?????
 	VectorXf h = estimate(tx_pilot, rx_pilot, estimator_length);
 	//cout<<"h = \n"<<h.transpose()<<endl;
 
