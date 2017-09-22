@@ -26,8 +26,8 @@ MatrixXf x2A(VectorXf& x, int l, int k)		// Note A(0,0) is x(0), so the 1st y is
 	for(int i = 0; i < n + 1; i++)
 	for(int j = 0; j < 2*k; j++)
 	{										//Guy: st-k is always 0 ????  see line -> int st = k;
-		A(i,j) = x(st - k + j + i);			//Guy: A(0,0)=x(0), A(0,1)=x(1), ... , A(0,2k-1)=x(2k-1)
- 	}										//Guy: A(1,0)=x(1), A(1,1)=x(2), ... , A(1,2k-1)=x(2k)
+		A(i,j) = x(st - k + j + i);			//Guy: A(0,0)=x(0), A(0,1)=x(1), ..... , A(0,2k-1)=x(2k-1)
+ 	}										//Guy: A(1,0)=x(1), A(1,1)=x(2), ..... , A(1,2k-1)=x(2k)
 	return A;								//Guy: A(n,0)=x(n), A(n,1)=x(n+1), ... , A(n,2k-1)=x(n+2k)
 }
 
