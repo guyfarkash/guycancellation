@@ -5,4 +5,7 @@ open a terminal window, and run
 
 You should see the USRP listed on the USB bus with a VID of 2500 and PID of 0022 for B200mini. 
 
+Also try these commands
 
+	uhd_find_devices
+	uhd_usrp_probe
