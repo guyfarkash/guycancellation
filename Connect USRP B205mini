@@ -1,0 +1,8 @@
+Connect the B205mini USRB to the PC USB port
+open a terminal window, and run
+
+	lsusb
+
+You should see the USRP listed on the USB bus with a VID of 2500 and PID of 0022 for B200mini. 
+
+
