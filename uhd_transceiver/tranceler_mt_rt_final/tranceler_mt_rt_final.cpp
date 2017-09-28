@@ -48,10 +48,10 @@ void sig_int_handler (int) {stop_signal_called = true;}
 VectorXcf mt_sine_generation(VectorXf &w_freq, VectorXf &wave_freq, int wave_num, double wave_freq_1, double wave_space, int spb, double rate, double ampl)
 {	
 
-	VectorXf t = VectorXf::LinSpaced(spb, 1, spb)/rate;
-	VectorXf temp = VectorXf::Zero(spb);
+	VectorXf t = VectorXf::LinSpaced(spb, 1, spb)/rate;		//Guy: LinSpaced(size, low, high) size of a vector whose coefficients are equally spaced between low and high
+	VectorXf temp = VectorXf::Zero(spb);		//Guy: initialize temp vector size of spb with zeros 
 	if(!w_freq(0))				// if freq-1 is 0, then choose 1st way to generate mt_sine
-		 wave_freq = VectorXf::LinSpaced(wave_num, wave_freq_1, wave_freq_1 + (wave_num - 1)*wave_space);
+		 wave_freq = VectorXf::LinSpaced(wave_num, wave_freq_1, wave_freq_1 + (wave_num - 1)*wave_space); //Guy: generates vector with freqs of sine waves
 	else 					// else, get the frequency from input
 	{	
 		wave_num = (w_freq.array() > 0).count();
