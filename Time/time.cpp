@@ -1,8 +1,5 @@
 // ======================time.cpp =========================
 
-
-#include "nonlinear_peak.hpp"
-#include "fft.hpp"
 #include <uhd/utils/thread_priority.hpp>
 #include <uhd/utils/safe_main.hpp>
 #include <uhd/usrp/multi_usrp.hpp>
@@ -44,7 +41,7 @@ void sig_int_handler (int) {stop_signal_called = true;}
 
 int UHD_SAFE_MAIN(int argc, char *argv[])
 {
-	string cpu, wire, subdev, a1, a2, ref, pps, tx_args, rx_args;
+	string cpu, wire, subdev, a1, a2, ref, pps, tx_args, rx_args, usrp_args;
 	cpu = "fc32";
 	wire = "sc16";
 	subdev = "A:A";
@@ -99,6 +96,7 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 	// set the usrp
 	uhd::usrp::multi_usrp::sptr tx_usrp = uhd::usrp::multi_usrp::make(tx_args);
 	uhd::usrp::multi_usrp::sptr rx_usrp = uhd::usrp::multi_usrp::make(rx_args);
+	uhd::usrp::multi_usrp::sptr usrp = uhd::usrp::multi_usrp::make(usrp_args);
 
 	tx_usrp->set_clock_source(ref);
 	tx_usrp->set_tx_rate(rate);
@@ -158,18 +156,18 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 	
     //reset usrp time to prepare for transmit/receive
 	double t=0;
+	int i=0;
 
-    t = tb.uhd_usrp_sink_0.get_time_now().get_real_secs();
->   std::cout << boost::format("Current time is: ") << t <<std::endl;
+    t = usrp->get_time_now().get_real_secs();
+	std::cout << boost::format("Current time is: ") << t <<std::endl;
 
-
-    std::cout << boost::format("Setting device timestamp to 0...") << std::endl;
+	std::cout << boost::format("Setting device timestamp to 0...") << std::endl;
     tx_usrp->set_time_now(uhd::time_spec_t(0.0));
-
-
-    t = tb.uhd_usrp_sink_0.get_time_now().get_real_secs();
->   std::cout << boost::format("Current time is: ") << t <<std::endl;
-
+	
+	for(i=0; i<10; i++){
+    t = usrp->get_time_now().get_real_secs();
+	std::cout << boost::format("Current time is: ") << t <<std::endl;
+	}
 	// // set up metadata for transmitter
 	// uhd::tx_metadata_t md;
 	// md.start_of_burst = true;				// set start of burst to true for 1st packet in the chain
