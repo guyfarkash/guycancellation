@@ -1,10 +1,11 @@
-import scipy.io as sp
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as ptch
 import scipy.fftpack as fft
 import os
+import sys
 
+# print (sys.argv)
 file = ['tx_file', 'rx_file', 'y_clean_file']
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -19,7 +20,7 @@ fh = open(dir_path + "/" + file[2], "rb")
 rx_clean = np.fromfile(fh, dtype=float)
 
 x = np.arange(tx.shape[0])
-print (x.shape)
+# print (x.shape)
 
 start = 0
 stop = start + 20440
@@ -43,9 +44,12 @@ bw = 5 * 10 ** 5
 step = 2 * bw / tx1f.shape[0]
 x1f = np.arange(- bw, bw, step)
 
+# print (tx1f.shape, rx1f.shape, rx_clean1f.shape, x1f.shape)
 # plt.figure(1)
 
-# plt.plot(x1, np.log10(tx1), 'r', x1, np.log10(rx1), 'b', x1, np.log10(rx_clean1), 'g', alpha=0.5)
+# plt.plot(x1, np.log10(tx1),
+# 	'r', x1, np.log10(rx1),
+# 	'b', x1, np.log10(rx_clean1), 'g', alpha=0.5)
 
 # red_patch = ptch.Patch(color='r', label='TX')
 # blue_patch = ptch.Patch(color='b', label='RX')
@@ -54,7 +58,9 @@ x1f = np.arange(- bw, bw, step)
 
 p_scale = 5.5
 plt.figure(2)
-plt.plot(x1f, p_scale * np.log10(tx1f), 'r', x1f, p_scale * np.log10(rx1f), 'b', x1f, p_scale * np.log10(rx_clean1f), 'g', alpha=0.5)
+plt.plot(x1f, p_scale * np.log10(tx1f),
+	'r', x1f, p_scale * np.log10(rx1f),
+	'b', x1f, p_scale * np.log10(rx_clean1f), 'g', alpha=0.5)
 
 red_patch = ptch.Patch(color='r', label='TX')
 blue_patch = ptch.Patch(color='b', label='RX')
