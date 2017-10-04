@@ -1,5 +1,8 @@
 // ======================time.cpp =========================
 
+
+// #include "nonlinear_peak.hpp"
+// #include "fft.hpp"
 #include <uhd/utils/thread_priority.hpp>
 #include <uhd/utils/safe_main.hpp>
 #include <uhd/usrp/multi_usrp.hpp>
@@ -50,6 +53,7 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 	ref = "internal";
 	pps = "internal";
 	string file[3] = {"tx_file", "rx_file", "y_clean_file"};
+	int i=0;
 
 	double freq, gain, total_num_samps, total_time, bw;		// default setting 
 	freq = 915e6;
@@ -73,7 +77,7 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 		("tx_args",po::value<string>(&tx_args)->default_value(""),"uhd device address args")
 		("rx_args",po::value<string>(&rx_args)->default_value(""),"uhd device address args")
 		("rate", po::value<double>(&rate)->default_value(2e6), "rate of transmit and receive samples")
-        	("ampl", po::value<float>(&ampl)->default_value(float(0.3)), "amplitude of the waveform [0 to 0.7]")
+        ("ampl", po::value<float>(&ampl)->default_value(float(0.3)), "amplitude of the waveform [0 to 0.7]")
 		("tx-gain", po::value<double>(&tx_gain)->default_value(gain), "gain for the transmit RF chain")
 		("rx-gain", po::value<double>(&rx_gain)->default_value(gain), "gain for the receive RF chain")
 		("wave-num", po::value<int>(&wave_num)->default_value(4), "number of sine wave tones")
@@ -91,7 +95,6 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 	po::notify(vm);
-
 
 	// set the usrp
 	uhd::usrp::multi_usrp::sptr tx_usrp = uhd::usrp::multi_usrp::make(tx_args);
@@ -156,21 +159,22 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 	
     //reset usrp time to prepare for transmit/receive
 	double t=0;
-	int i=0;
 
     t = usrp->get_time_now().get_real_secs();
-	std::cout << boost::format("Current time is: ") << t <<std::endl;
+   std::cout << boost::format("Current time is: ") << t << std::endl;
 
-	std::cout << boost::format("Setting device timestamp to 0...") << std::endl;
-    tx_usrp->set_time_now(uhd::time_spec_t(0.0));
-	
-	for(i=0; i<10; i++){
+
+    std::cout << boost::format("Setting device timestamp to 0...") << std::endl;
+    usrp->set_time_now(uhd::time_spec_t(0.0));
+
+    for (i=0; i<20; i++){
     t = usrp->get_time_now().get_real_secs();
-	std::cout << boost::format("Current time is: ") << t <<std::endl;
+   std::cout << boost::format("Current time is: ") << t << std::endl;
 	}
+
 	// // set up metadata for transmitter
 	// uhd::tx_metadata_t md;
-	// md.start_of_burst = true;				// set start of burst to true for 1st packet in the chain
+	// md.uhd_usrp_sink_0start_of_burst = true;				// set start of burst to true for 1st packet in the chain
 	// md.end_of_burst = false;                // set end of burst to true for the last packet in the chain
 	// md.has_time_spec = true;                // set true to send at the time specified by time spec; set false to send immediately
 	// md.time_spec = uhd::time_spec_t(0.1);
