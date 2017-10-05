@@ -1,0 +1,3 @@
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_final/build/CMakeFiles/edit_cache.dir
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_final/build/CMakeFiles/rebuild_cache.dir
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_final/build/CMakeFiles/transceiver_canceler.dir

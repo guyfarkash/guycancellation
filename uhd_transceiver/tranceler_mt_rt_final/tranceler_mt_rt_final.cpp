@@ -371,7 +371,7 @@ int UHD_SAFE_MAIN(int argc, char *argv[])
 
 	double freq, gain, total_num_samps, total_time, bw;		// default setting 
 	freq = 915e6;
-	gain = 65;
+	gain = 25;
 	bw = 1e6;
 	total_num_samps = 0;
 	total_time = 20;

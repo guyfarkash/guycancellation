@@ -1,1 +1,3 @@
-/home/flexicon/Downloads/GNURadio/uhd/host/examples/tranceler_mt_rt_final/build/CMakeFiles/tranceler_mt_rt_final.dir
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_mt_rt_final/build/CMakeFiles/edit_cache.dir
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_mt_rt_final/build/CMakeFiles/rebuild_cache.dir
+/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_mt_rt_final/build/CMakeFiles/tranceler_mt_rt_final.dir
