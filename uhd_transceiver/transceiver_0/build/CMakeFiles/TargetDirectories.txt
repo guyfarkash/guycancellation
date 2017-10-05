@@ -1,0 +1,1 @@
+/home/wimnet/Desktop/Guy/uhd_transceiver/transceiver_0/build/CMakeFiles/transceiver_0.dir

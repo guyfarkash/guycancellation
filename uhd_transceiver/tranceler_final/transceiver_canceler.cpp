@@ -484,12 +484,13 @@ int UHD_SAFE_MAIN(int argc,char *argv[]){
 	string type = "float";
 	string file = "sine_wave";
 
-	double rate,rx_rate,tx_rate,freq,wave_freq,gain,bw,ampl;
+	double rate,rx_rate,tx_rate,freq,wave_freq,txgain,rxgain,bw,ampl;
 	rate = 2e6;
 		file = file +"_" + boost::lexical_cast<string>(rate/1e6) + "M";
 	wave_freq = 100e3;
 	freq = 915e6;
-	gain = 25;				// loop cable: 25; w/o cable: 45
+	txgain = 25;
+	rxgain = 50;				// loop cable: 25; w/o cable: 45
 	bw = 1e6;
 	rx_rate = rate;
 	tx_rate = rate;
@@ -539,8 +540,8 @@ int UHD_SAFE_MAIN(int argc,char *argv[]){
 	tx_usrp->set_tx_freq(freq);
 	rx_usrp->set_rx_freq(freq);
 
-	tx_usrp->set_tx_gain(gain);
-	rx_usrp->set_rx_gain(gain);
+	tx_usrp->set_tx_gain(txgain);
+	rx_usrp->set_rx_gain(rxgain);
 	
 	tx_usrp->set_tx_subdev_spec(subdev);
 	rx_usrp->set_rx_subdev_spec(subdev);    // tx the same as rx?

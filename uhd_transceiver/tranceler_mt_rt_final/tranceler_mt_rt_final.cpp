@@ -332,6 +332,7 @@ void receiver(
 		{
 			std::string error = str(boost::format("Receiver error: %s") % md.strerror());
 			if (continue_on_bad_packet)
+			
 			{
 				std::cerr << error << std::endl;
 				continue;

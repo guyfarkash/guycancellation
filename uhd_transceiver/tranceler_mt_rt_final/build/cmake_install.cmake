@@ -1,4 +1,4 @@
-# Install script for directory: /home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_mt_rt_final
+# Install script for directory: /home/wimnet/Desktop/Guy/uhd_transceiver/tranceler_mt_rt_final
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/g/Desktop/GitHub/Guy/guycancellation/uhd_transceiver/tranceler_mt_rt_final/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/wimnet/Desktop/Guy/uhd_transceiver/tranceler_mt_rt_final/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
